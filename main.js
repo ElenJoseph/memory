@@ -1,3 +1,107 @@
+let verify = true
+let point = 0
+let maxPoint = 0
+const choice = document.getElementById('choice')
+const help = document.getElementById('help')
+const easybt = document.getElementById('easy')
+const normalbt = document.getElementById('normal')
+const hardbt = document.getElementById('hard')
+const resetbt = document.getElementById('reset')
+resetbt.style.visibility = 'hidden'
+easybt.addEventListener('click', easy)
+normalbt.addEventListener('click', normal)
+hardbt.addEventListener('click', hard)
+resetbt.addEventListener('click', reset)
+let oldList = []
+function easy() {
+  if (verify) {
+    verify = false
+    oldList = []
+    oldList = [
+    { name: '2', img: 'img/2.png'},
+    { name: '2', img: 'img/2.png' },
+    { name: '3', img: 'img/3.png' },
+    { name: '3', img: 'img/3.png' },
+    { name: '4', img: 'img/4.png' },
+    { name: '4', img: 'img/4.png' },
+    { name: '5', img: 'img/5.png' },
+    { name: '5', img: 'img/5.png' }
+    ]
+    maxPoint = 4
+    start()
+    choice.style.display = 'none'
+    help.textContent = 'Game Started !'
+    setTimeout(function () { help.textContent = 'Enjoy Playing !' }, 1000)
+    setTimeout(function () { help.style.display = 'none' }, 3000)
+  }
+}
+function normal() {
+  if (verify) {
+    verify = false
+    oldList = []
+    oldList = [
+    { name: '2', img: 'img/2.png' },
+    { name: '2', img: 'img/2.png' },
+    { name: '3', img: 'img/3.png' },
+    { name: '3', img: 'img/3.png' },
+    { name: '4', img: 'img/4.png' },
+    { name: '4', img: 'img/4.png' },
+    { name: '5', img: 'img/5.png' },
+    { name: '5', img: 'img/5.png' },
+    { name: '6', img: 'img/6.png' },
+    { name: '6', img: 'img/6.png' },
+    { name: '7', img: 'img/7.png' },
+    { name: '7', img: 'img/7.png' },
+    { name: '8', img: 'img/8.png' },
+    { name: '8', img: 'img/8.png' },
+    { name: '9', img: 'img/9.png' },
+    { name: '9', img: 'img/9.png' }
+    ]
+    maxPoint = 8
+    start()
+    choice.style.display = 'none'
+    choice.style.display = 'none'
+    help.textContent = 'Game Started !'
+    setTimeout(function () { help.textContent = 'Enjoy Playing !' }, 1000)
+    setTimeout(function () { help.style.display = 'none' }, 3000)
+  }
+}
+function hard() {
+  if (verify) {
+    verify = false
+    oldList = []
+    oldList = [
+      { name: '2', img: 'img/2.png' },
+      { name: '2', img: 'img/2.png' },
+      { name: '3', img: 'img/3.png' },
+      { name: '3', img: 'img/3.png' },
+      { name: '4', img: 'img/4.png' },
+      { name: '4', img: 'img/4.png' },
+      { name: '5', img: 'img/5.png' },
+      { name: '5', img: 'img/5.png' },
+      { name: '6', img: 'img/6.png' },
+      { name: '6', img: 'img/6.png' },
+      { name: '7', img: 'img/7.png' },
+      { name: '7', img: 'img/7.png' },
+      { name: '8', img: 'img/8.png' },
+      { name: '8', img: 'img/8.png' },
+      { name: '9', img: 'img/9.png' },
+      { name: '9', img: 'img/9.png' },
+      { name: '10', img: 'img/10.png' },
+      { name: '10', img: 'img/10.png' },
+      { name: '11', img: 'img/11.png' },
+      { name: '11', img: 'img/11.png' }
+       ]
+    maxPoint = 10
+    start()
+    choice.style.display = 'none'
+    choice.style.display = 'none'
+    help.textContent = 'Game Started !'
+    setTimeout(function () { help.textContent = 'Enjoy Playing !' }, 1000)
+    setTimeout(function () { help.style.display = 'none' }, 3000)
+  }
+}
+
 function shuffle(src) {
   const copy = [...src]
 
@@ -12,162 +116,123 @@ function shuffle(src) {
 
   return copy
 }
+function start() {
+  let newList = shuffle(oldList)
+  let first = null
+  let second = null
+  let draws = true
+  let flipCount = 0
+  let game = document.getElementById('game')
+  let grid = document.createElement('div')
+  grid.setAttribute('class', 'grid')
+  game.appendChild(grid)
+  for (let i = 0; i < newList.length; i++) {
+    let card = document.createElement('div')
+    card.classList.add('card')
+    card.dataset.name = newList[i].name
 
+    let front = document.createElement('div')
+    front.classList.add('front')
 
+    let back = document.createElement('div')
+    back.classList.add('back')
+    back.style.backgroundImage = 'url(' + newList[i].img + ')'
 
-
-// Game Area is a ID in HTML which will hold everything
-const gameArea = document.getElementById('gameArea');
-
-// creating a array of level of dificulty
-
-const levels = [
-'Easy', 'Medium', 'Hard', 'Extreme'
-]
-
-// storing all the events happening with those button plus the HTML code for it
-const levlesAction = []
-
-// this will run a loop which will create buttons html code for every button/level in levels array
-
-levlesAction.push(`<div class="btnArea">`);
-for(let number = 0; number < levels.length ; number++){
-  levlesAction.push(`<button class="btn" onclick="${levels[number]}()" id="${levels[number]}">${levels[number]}</button>`);
-}
-levlesAction.push(`</div>`)
-
-
-
-gameArea.innerHTML = levlesAction.join(' ')
-// =======================================================
-// ======================Game Inventory==========================
-
-const game = {
-    // These are the default points
-    startPoints : 0,
-    // level selected by player
-    level : null,
-    // message to the player
-    message : "Let's Start it!",
-    // points of Player
-    TotalPoints : "0",
-    listOfCards : [
-    //  array which will hold all the cards in it.
-    // add all the link/name of the images which you want to add remeber to add every image twice.
-    {link: "f1.png", codeWord: "x"},
-    {link: "f1.png", codeWord: "x"},
-    {link: "f2.png", codeWord: "y"},
-    {link: "f2.png", codeWord: "y"},
-    {link: "f3.png", codeWord: "cx"},
-    {link: "f3.png", codeWord: "cx"},
-    {link: "f4.png", codeWord: "bx"},
-    {link: "f4.png", codeWord: "bx"},
-    {link: "f5.png", codeWord: "i"},
-    {link: "f5.png", codeWord: "i"},
-    
-    ],
-
-    // suffles cards will come here
-    suffleCards : [],
-    // this will be updated by the function automatically ... this is the number of cards 
-    numberOfCards : null,
-
-  openedCards: [],
-  numberOfOpenCards: 0
-
-}
-
-
-// =======================================================
-// =======================================================
-
-
-
-
-
-
-
-
-
-// getting all the button back from HTML
-const $easy = document.getElementById('Easy')
-const $medium = document.getElementById('Medium')
-const $hard = document.getElementById('Hard')
-
-function Easy(){
- game.numberOfCards = 4
- game.level = "Easy"
-
- return Start()
-}
-
-
-function Medium(){
-  game.numberOfCards = 8
-  game.level = "Medium"
- 
-  return Start()
- }
-
-
-function Hard(){
-  game.numberOfCards = 10
-  game.level = "Hard"
- 
-  return Start()
- }
-
-// start button will reset everything and trigger the createCard function
-function Start(){
-game.suffleCards = shuffle(game.listOfCards)
-let firstDraw = null;
-let secondDraw = null;
-let drawn = true;
-let drawCount = 0;
-
-return createCards()
-}
-
-
-// this will craete the HTML code for card and it is the main Function.
-
-function createCards(){
-    const cardSet = []
-
-    cardSet.push(`<div class="cards">`)
-    for(let number = 0 ; number < game.numberOfCards; number++){
-
-        cardSet.push(`<div class="flip" onclick="letsMatch()" data-code="${game.suffleCards[number].codeWord}" class="cardBox">
-        <div class="top"><img src="img/bg.jpg" alt=""></div>
-        <div class="bottom"><img src="img/${game.suffleCards[number].link}" ></div>
-      </div>`)
-      
-      }      
-    cardSet.push(`</div>`);
-
-    return gameArea.innerHTML = cardSet.join(' ');
-}
-
-
-
-
-function letsMatch(){
-  // this.classList.toggle('flip');
-  
-  
-  if(game.numberOfOpenCards === 0 || game.numberOfOpenCards === 1 || game.numberOfOpenCards === 2){
-game.openedCards.push(this);
-game.numberOfOpenCards++;
-  console.log(this);
-    if(game.openedCards[0] === game.openedCards[1]){
-      console.log(matched);
+    grid.appendChild(card)
+    card.appendChild(front)
+    card.appendChild(back)
+  }
+  grid.addEventListener('click', function (e) {
+    let clicked = e.target
+    draws = true
+    flipCount++
+    if (draws === maxPoint) {
+      gameOver()
     }
+    if (clicked.parentNode.classList.contains('selected') || clicked.parentNode.classList.contains('match')) {
+    } else {
+      if (draws === true && flipCount === 1) {
+        first = clicked.parentNode.dataset.name
+        console.log(first)
+        clicked.parentNode.classList.add('selected')
+      } else if (draws === true && flipCount === 2) {
+        second = clicked.parentNode.dataset.name
+        console.log(second)
+        clicked.parentNode.classList.add('selected')
+      }
+      if (first && second) {
+        if (first === second) {
+          console.log('matched')
+          draws = false
+          first = null
+          second = null
+          flipCount = 0
+          setTimeout(matched, 1000)
+        } else {
+          console.log('Not Matched')
+          draws = false
+          first = null
+          second = null
+          flipCount = 0
+          setTimeout(notmatched, 1000)
+        }
+      }
+    }
+  })
+  function matched() {
+    let selectedCards = document.querySelectorAll('.selected')
+    if (draws === maxPoint) {
+      gameOver()
+    }
+
+    for (let j = 0; j < selectedCards.length; j++) {
+      selectedCards[j].classList.add('match')
+      selectedCards[j].classList.remove('selected')
+    }
+    point++
+    console.log('matched')
+    setTimeout(pointRecord, 500)
+  }
+  function notmatched() {
+    let selectedCards = document.querySelectorAll('.selected')
+    for (let j = 0; j < selectedCards.length; j++) {
+      selectedCards[j].classList.remove('selected')
+    }
+    console.log('removed')
+    setTimeout(pointRecord, 500)
+  }
 }
-  else{
-    game.numberOfCards = 0;
-    console.log('so many cards up')
+function pointRecord() {
+  if (point === maxPoint) {
+    gameOver()
+    console.log('game over')
   }
 }
 
-// final actions for the memory
-
+function gameOver() {
+  animation()
+  choice.style.display = 'none'
+  help.style.display = 'block'
+  help.textContent = 'Game Over !'
+  setTimeout(function () { help.textContent = 'I hope You Enjoyed Playing!' }, 1000)
+  setTimeout(function () { help.textContent = `You rock it! now you're level up !` }, 3000)
+}
+function reset() {
+  location.reload()
+}
+function animation() {
+  let ReSelectingCards = document.querySelectorAll('.card')
+  for (let j = 0; j < ReSelectingCards.length; j++) {
+    ReSelectingCards[j].classList.add('selected')
+    ReSelectingCards[j].classList.remove('match')
+    console.log(ReSelectingCards)
+    ReSelectingCards[j].classList.add('drop')
+    setTimeout(function () {
+      resetbt.style.visibility = 'visible'
+      choice.style.display = 'block'
+      easybt.style.display = 'none'
+      normalbt.style.display = 'none'
+      hardbt.style.display = 'none'
+    }, 4000)
+  }
+}
