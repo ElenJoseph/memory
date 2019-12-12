@@ -219,7 +219,10 @@ function gameOver() {
 }
 function reset() {
   location.reload()
+
 }
+
+
 function animation() {
   let ReSelectingCards = document.querySelectorAll('.card')
   for (let j = 0; j < ReSelectingCards.length; j++) {
@@ -234,5 +237,6 @@ function animation() {
       normalbt.style.display = 'none'
       hardbt.style.display = 'none'
     }, 4000)
+    
   }
 }
