@@ -222,7 +222,6 @@ function reset() {
 
 }
 
-
 function animation() {
   let ReSelectingCards = document.querySelectorAll('.card')
   for (let j = 0; j < ReSelectingCards.length; j++) {
