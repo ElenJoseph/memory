@@ -29,6 +29,10 @@ body {
     transform-style: preserve-3d;
     margin: 5px;
 }
+.front:hover {
+    color: white;
+    border: 2px solid white;
+}
 
 .card,
 .back,
@@ -36,8 +40,6 @@ body {
     border-radius: 50px;
     width: 200px;
     height: 130px;
-    
-    
     
 }
 
