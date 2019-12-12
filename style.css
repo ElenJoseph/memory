@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    
 }
 
 .card {
@@ -32,9 +33,12 @@ body {
 .card,
 .back,
 .front {
-    height: 280px;
+    border-radius: 50px;
     width: 200px;
-    border-radius: 20px;
+    height: 130px;
+    
+    
+    
 }
 
 .back,
