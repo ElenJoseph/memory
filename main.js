@@ -32,7 +32,7 @@ function easy() {
     choice.style.display = 'none'
     help.textContent = 'Game Started !'
     setTimeout(function () { help.textContent = 'Enjoy Playing !' }, 1000)
-    setTimeout(function () { help.style.display = 'none' }, 3000)
+    setTimeout(function () { help.style.display = 'none! ' }, 3000)
   }
 }
 function normal() {
@@ -214,8 +214,8 @@ function gameOver() {
   choice.style.display = 'none'
   help.style.display = 'block'
   help.textContent = 'Game Over !'
-  setTimeout(function () { help.textContent = 'I hope You Enjoyed Playing!' }, 1000)
-  setTimeout(function () { help.textContent = `You rock it! now you're level up !` }, 3000)
+  setTimeout(function () { help.textContent = 'Level up!' }, 1000)
+  setTimeout(function () { help.textContent = `You rock it!` }, 3000)
 }
 function reset() {
   location.reload()
