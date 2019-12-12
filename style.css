@@ -82,13 +82,30 @@ body {
     border: 2px solid pink;;
     margin: 0 auto;
     background-color: white;
+    border-radius: 50px;
+    opacity: 90%;
+    
 }
+
 
 .levels:hover {
     color: white;
     border: 2px solid white;
     background-color: pink;
+    animation: shadow-pulse 1s infinite;
+    
 }
+
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(245, 4, 4, 0.83);
+     }
+     100% {
+          box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+     }
+}
+
 
 @keyframes over {
     0% {
@@ -121,7 +138,6 @@ body {
 .drop {
     animation-name: over;
     animation-duration: 2s;
-
     animation-timing-function: linear;
 }
 
@@ -135,7 +151,22 @@ body {
     text-align: center;
     width: 100%;
     background-color: pink;
+    opacity: 90%;
     border: 2px solid white;
+    border-radius: 50px;
     margin-top: -20px;
     color: white;
+    animation-duration: 1s;
+    animation-name: slidein;
 }
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%; 
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
